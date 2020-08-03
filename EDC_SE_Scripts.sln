@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDC_Base", "EDC_Base\EDC_Base.csproj", "{59963257-FA81-4D35-8A26-4AF4920CB0DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59963257-FA81-4D35-8A26-4AF4920CB0DD}.Debug|x64.ActiveCfg = Debug|x64
+		{59963257-FA81-4D35-8A26-4AF4920CB0DD}.Debug|x64.Build.0 = Debug|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22944829-74F2-4D44-A55C-DF27F3890C58}
+	EndGlobalSection
+EndGlobal
