@@ -148,6 +148,8 @@ namespace IngameScript
             //GridTerminalSystem.GetBlocksOfType<IMyEntity>(blockList, block => block.InventoryCount > 0);
             GridTerminalSystem.GetBlocksOfType<IMyGasGenerator>(gasGenList, block => block.InventoryCount > 0);
 
+            gasGenList.Sort((x, y) => string.Compare(x.DisplayNameText, y.DisplayNameText));
+
             foreach (IMyGasGenerator block in gasGenList)
             {
                 double subtotalIce = 0;
@@ -168,6 +170,8 @@ namespace IngameScript
             List<IMyTerminalBlock> blockList = new List<IMyTerminalBlock>();
             GridTerminalSystem.GetBlocksOfType<IMyEntity>(blockList, block => block.BlockDefinition.TypeId.ToString() != "MyObjectBuilder_OxygenGenerator"
                                                                                                                            && block.InventoryCount > 0);
+
+            blockList.Sort((x, y) => string.Compare(x.DisplayNameText, y.DisplayNameText));
 
             double otherIce = 0;
             foreach (IMyTerminalBlock block in blockList)
@@ -194,9 +198,11 @@ namespace IngameScript
             List<IMyGasTank> tankList = new List<IMyGasTank>();
             GridTerminalSystem.GetBlocksOfType<IMyGasTank>(tankList, block => true);
 
+            tankList.Sort((x, y) => string.Compare(x.DisplayNameText, y.DisplayNameText));
+
             foreach (IMyGasTank block in tankList)
             {
-                outputText += $"{block.DisplayNameText}: {block.FilledRatio.ToString("##0.0%")}\n";
+                outputText += $"{block.DisplayNameText}: {block.FilledRatio:##0.0%}\n";
             }
 
             outputText += $"\n{nowString}";
@@ -274,7 +280,7 @@ namespace IngameScript
                                      ShortAmount(materialList.Values[i].oreCount).PadLeft(5) + "  " +
                                      ShortAmount(materialList.Values[i].ingotCount).PadLeft(5) + "\n";
 
-                if (materialList.Values[i].itemSubType == "Stone") CheckGravelLevels(materialList.Values[i].ingotCount);
+                //if (materialList.Values[i].itemSubType == "Stone") CheckGravelLevels(materialList.Values[i].ingotCount);
             }
 
             outputText += $"\n{nowString}";
@@ -474,8 +480,8 @@ namespace IngameScript
             //Echo("Output");
             string timerDelay = timer.TriggerDelay.ToString("#0");
             //outputText = $"COMPONENTS  {nowString}  Default Min:{minDefault.ToString("#,##0")}  Autobuilds every {timerDelay}s\n\n";
-            outputText = $"COMPONENTS  {nowString}  Default Min:{minDefault.ToString("#,##0")}  Autobuilds in {timeRemaining.ToString(@"mm\:ss")}\n\n";
-            string customText = $"default={minDefault.ToString("0")}\n";
+            outputText = $"COMPONENTS  {nowString}  Default Min:{minDefault:#,##0}  Autobuilds in {timeRemaining:mm\\:ss}\n\n";
+            string customText = $"default={minDefault:0}\n";
 
             int componentCount = componentList.Count;
             string componentText = "";
@@ -533,7 +539,7 @@ namespace IngameScript
             while (buildAmount > 0)
             {
                 thisOrder = Math.Min(buildAmount, batchAmount);
-                buildAmount = buildAmount - thisOrder;
+                buildAmount -= thisOrder;
 
                 string assemblerName = "";
                 double minAmount = 1000000, thisAmount;
